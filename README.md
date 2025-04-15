@@ -76,6 +76,6 @@ Sistema-EIV/
 
 Desenvolvido por **Felipe Magron**  
 📧 felipemagron@gmail.com  
-🔗 [LinkedIn](www.linkedin.com/in/felipe-magron)  
+🔗 [LinkedIn]: https://www.linkedin.com/in/felipe-magron/
 🔐 Projeto privado hospedado no GitHub
 
