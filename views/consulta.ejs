@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Consulta - EIV</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+<body>
+  <h1>Empreendimentos Cadastrados</h1>
+  <a href="/">Voltar</a>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Tipo</th>
+      <th>Localização</th>
+      <th>Área</th>
+      <th>Ações</th>
+    </tr>
+    <% empreendimentos.forEach(e => { %>
+      <tr>
+        <td><%= e.nome %></td>
+        <td><%= e.tipo %></td>
+        <td><%= e.localizacao %></td>
+        <td><%= e.area_construida %></td>
+        <td>
+          <a href="/editar/<%= e.id %>">Editar</a>
+          <form action="/excluir/<%= e.id %>" method="POST" style="display:inline;">
+            <button type="submit">Excluir</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro - EIV</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+<body>
+  <h1>Cadastro de Empreendimento</h1>
+  <form action="/cadastro" method="POST">
+    <input type="text" name="nome" placeholder="Nome" required />
+    <input type="text" name="tipo" placeholder="Tipo" />
+    <input type="text" name="localizacao" placeholder="Localização" />
+    <input type="number" step="1" name="area_construida" placeholder="Área Construída" />
+    <textarea name="finalidade" placeholder="Finalidade"></textarea>
+    <textarea name="impactos" placeholder="Impactos"></textarea>
+    <button type="submit">Cadastrar</button>
+  </form>
+</body>
+</html>

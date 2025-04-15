@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Empreendimento</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+<body>
+  <h1>Editar Empreendimento</h1>
+  <form action="/editar/<%= item.id %>" method="POST">
+    <input type="text" name="nome" value="<%= item.nome %>" required />
+    <input type="text" name="tipo" value="<%= item.tipo %>" />
+    <input type="text" name="localizacao" value="<%= item.localizacao %>" />
+    <input type="number" step="0.01" name="area_construida" value="<%= item.area_construida %>" />
+    <textarea name="finalidade"><%= item.finalidade %></textarea>
+    <textarea name="impactos"><%= item.impactos %></textarea>
+    <button type="submit">Salvar</button>
+  </form>
+</body>
+</html>
