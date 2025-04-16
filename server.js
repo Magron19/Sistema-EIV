@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', routes);
 
 // Inicializa o servidor
-const PORT = 3000;
+const PORT = escolha um de preferência, ex: 2000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
