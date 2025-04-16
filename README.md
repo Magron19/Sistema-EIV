@@ -70,7 +70,7 @@ Sistema-EIV/
 ## 📌 Observações
 
 - O sistema ainda está em desenvolvimento. Melhorias no layout e responsividade seram implementadas.
-c
+- Será implementado um guia de GPS para tornar a busca mais prática e fácil, mostrando também, que tipos de construções possuem perto do loteamento, como creches, postos de gasolina, etc...
 - O armazenamento é local e não persistente entre ambientes (ideal para testes e apresentações acadêmicas).
 
 ## 👨‍💻 Autor
