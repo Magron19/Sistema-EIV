@@ -60,7 +60,7 @@ Sistema-EIV/
 
 4. Acesse o sistema:
    ```
-   http://localhost:3000
+   http://localhost:escolha um de preferência, ex: 2000
    ```
 
 ## 🔧 Requisitos
