@@ -6,30 +6,59 @@
   <link rel="stylesheet" href="/styles/style.css" />
 </head>
 <body>
-  <h1>Empreendimentos Cadastrados</h1>
-  <a href="/">Voltar</a>
-  <table>
-    <tr>
-      <th>Nome</th>
-      <th>Tipo</th>
-      <th>Localização</th>
-      <th>Área</th>
-      <th>Ações</th>
-    </tr>
-    <% empreendimentos.forEach(e => { %>
-      <tr>
-        <td><%= e.nome %></td>
-        <td><%= e.tipo %></td>
-        <td><%= e.localizacao %></td>
-        <td><%= e.area_construida %></td>
-        <td>
-          <a href="/editar/<%= e.id %>">Editar</a>
-          <form action="/excluir/<%= e.id %>" method="POST" style="display:inline;">
-            <button type="submit">Excluir</button>
-          </form>
-        </td>
-      </tr>
-    <% }) %>
-  </table>
+
+  <div class="main-actions">
+    <a href="/" style="margin-bottom: 20px; display: inline-block;">Voltar</a>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+
+        <tr>
+          <th>País</th>
+          <th>Cidade</th>
+          <th>Endereço</th>
+          <th>Número</th>
+          <th>Tipo</th>
+          <th>Localização</th>
+          <th>Finalidade</th>
+          <th>Área Construída (m²)</th>
+          <th>Impactos</th>
+          <th>GPS</th>
+          <th>Ações</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        <% empreendimentos.forEach((empreendimento) => { %>
+          <tr>
+            <td><%= empreendimento.país %></td>
+            <td><%= empreendimento.cidade %></td>
+            <td><%= empreendimento.endereco %></td>
+            <td><%= empreendimento.numero %></td>
+            <td><%= empreendimento.tipo %></td>
+            <td><%= empreendimento.localizacao %></td>
+            <td><%= empreendimento.finalidade %></td>
+            <td><%= empreendimento.area_construida %></td>
+            <td><%= empreendimento.impactos %></td>
+            <td>
+              <%= empreendimento.latitude %>, <%= empreendimento.longitude %><br>
+              <a href="https://www.openstreetmap.org/?mlat=<%= empreendimento.latitude %>&mlon=<%= empreendimento.longitude %>#map=18/<%= empreendimento.latitude %>/<%= empreendimento.longitude %>" target="_blank" class="map-btn">
+                Ver no mapa
+              </a>
+            </td>
+            <td class="actions">
+              <a href="/editar/<%= empreendimento.id %>" class="btn-edit">Editar</a>
+              <form action="/excluir/<%= empreendimento.id %>" method="POST" style="display:inline;">
+                <button type="submit" class="btn-delete">Excluir</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </div>
+
 </body>
 </html>
