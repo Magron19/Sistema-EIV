@@ -72,7 +72,8 @@ Sistema-EIV/
 - O sistema ainda está em desenvolvimento. Melhorias no layout e responsividade seram implementadas.
 - Será implementado um guia de GPS para tornar a busca mais prática e fácil, mostrando também, que tipos de construções possuem perto do loteamento, como creches, postos de gasolina, etc...
 - O armazenamento é local e não persistente entre ambientes (ideal para testes e apresentações acadêmicas).
-
+- Futuramente será implementado um banco de dados utilizando MySQL.
+  
 ## 👨‍💻 Autor
 
 Desenvolvido por **Felipe Magron**  
