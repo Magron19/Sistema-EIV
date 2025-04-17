@@ -3,21 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <title>Cadastro - EIV</title>
+
+  <!-- Leaflet CSS -->
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+<!-- Leaflet JS -->
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+></script>
+
   <link rel="stylesheet" href="/styles/style.css" />
 </head>
-
 <body>
-
   <h1>Cadastro de Empreendimento</h1>
+
   <form action="/cadastro" method="POST">
-    <input type="text" name="nome" placeholder="Nome" required />
-    <input type="text" name="tipo" placeholder="Tipo" />
-    <input type="text" name="localizacao" placeholder="Localização" />
-    <input type="number" step="1" name="area_construida" placeholder="Área Construída" />
-    <textarea name="finalidade" placeholder="Finalidade"></textarea>
-    <textarea name="impactos" placeholder="Impactos"></textarea>
+      <div>   
+        <label for="país">País</label>
+        <input type="text" id="país" name="país" placeholder="Brasil" required />
+      </div>
+      <div>
+        <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" name="cidade" placeholder="Ex: Cianorte" required />
+    </div>
+    <div>
+      <label for="endereco">Endereço</label>
+      <input type="text" id="endereco" name="endereco" placeholder="Ex: Av. Brasil" required />
+    </div>
+    <div>
+      <label for="numero">Número</label>
+      <input type="text" id="numero" name="numero" placeholder="Ex: 1234" required />
+    </div>
+    
+    <div>
+      <label for="tipo">Tipo</label>
+      <input type="text" id="tipo" name="tipo" placeholder="Comercial / Residencial" />
+    </div>
+    <div>
+
+      <label for="localizacao">Localização (Lat, Long)</label>
+      <input type="text" id="localizacao" name="localizacao" placeholder="Latitude, Longitude" readonly />
+    </div>
+
+    <div>
+      <label>Mapa</label>
+      <div id="map" style="height: 300px; width: 100%; margin-bottom: 1rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15);"></div>
+    </div>
+    
+    <div>
+      <label for="area_construida">Área Construída (m²)</label>
+      <input type="number" id="area_construida" name="area_construida" step="1" required />
+    </div>
+    <div>
+      <label for="finalidade">Finalidade</label>
+      <textarea id="finalidade" name="finalidade" placeholder="Descreva a finalidade do empreendimento"></textarea>
+    </div>
+    <div>
+      <label for="impactos">Impactos</label>
+      <textarea id="impactos" name="impactos" placeholder="Informe os impactos ambientais esperados"></textarea>
+    </div>
+
+    <!-- Campos ocultos com coordenadas -->
+    <input type="hidden" name="latitude" id="latitude">
+    <input type="hidden" name="longitude" id="longitude">
+
+    <button type="button" onclick="buscarCoordenadas()">Obter Coordenadas</button>
     <button type="submit">Cadastrar</button>
   </form>
+
+ <script>
+  let map, marker;
+
+  function initMap(lat, lon) {
+    const position = [parseFloat(lat), parseFloat(lon)];
+
+    if (!map) {
+      map = L.map('map').setView(position, 16);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+    } else {
+      map.setView(position, 16);
+    }
+
+    if (marker) {
+      marker.setLatLng(position);
+    } else {
+      marker = L.marker(position).addTo(map);
+    }
+  }
+
+  function buscarCoordenadas() {
+    const pais = document.getElementById('país').value;
+    const cidade = document.getElementById('cidade').value;
+    const endereco = document.getElementById('endereco').value;
+    const numero = document.getElementById('numero').value;
+
+    if (!pais || !cidade || !endereco || !numero) {
+      alert('Preencha todos os campos de endereço antes de buscar as coordenadas.');
+      return;
+    }
+
+    const query = `${endereco}, ${numero}, ${cidade}, ${pais}`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+    fetch(url, {
+      headers: {
+        'Accept-Language': 'pt-BR',
+        'User-Agent': 'eiv-system/1.0 (seuemail@exemplo.com)'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data && data.length > 0) {
+        const { lat, lon } = data[0];
+        document.getElementById('latitude').value = lat;
+        document.getElementById('longitude').value = lon;
+        document.getElementById('localizacao').value = `${lat}, ${lon}`;
+        initMap(lat, lon);
+      } else {
+        alert('Localização não encontrada. Verifique os dados digitados.');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao buscar localização:', error);
+      alert('Erro ao tentar obter a localização.');
+    });
+  }
+</script>
 
 </body>
 </html>
