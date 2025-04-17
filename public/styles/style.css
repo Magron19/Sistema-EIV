@@ -1,3 +1,5 @@
+
+
 /* Reset básico */
 * {
   margin: 0;
@@ -83,7 +85,7 @@ table {
 th, td {
   padding: 16px;
   border-bottom: 1px solid #edf2f7;
-  text-align: left;
+  text-align: center;
   font-size: 15px;
 }
 
@@ -119,6 +121,15 @@ tr:hover {
   cursor: pointer;
 }
 
+.actions a {
+  background-color: #3182ce;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.actions a:hover {
+  background-color: #2c5282;
+}
+
 .btn-edit {
   background-color: #f6ad55;
 }
@@ -150,6 +161,7 @@ tr:hover {
     gap: 8px;
   }
 }
+
 .main-actions {
   display: flex;
   flex-direction: column;
@@ -168,7 +180,7 @@ tr:hover {
   font-weight: 600;
   transition: background-color 0.3s ease;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   text-align: center;
 }
 
