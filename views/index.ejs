@@ -13,5 +13,118 @@
     <a href="/consulta" class="btn-main">Consultar Empreendimentos</a>
   </div>
   
+  <script>
+    async function getLocationFromAddress(enderecoCompleto) {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(enderecoCompleto)}&format=json&limit=1`;
+  
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'Accept-Language': 'pt-BR',
+          }
+        });
+        const data = await response.json();
+  
+        if (data && data.length > 0) {
+          const location = data[0];
+          const latitude = location.lat;
+          const longitude = location.lon;
+  
+          document.getElementById('latitude').value = latitude;
+          document.getElementById('longitude').value = longitude;
+          document.getElementById('localizacao').value = `${latitude}, ${longitude}`;
+        } else {
+          alert("Endereço não encontrado. Verifique os dados.");
+          document.getElementById('localizacao').value = '';
+        }
+      } catch (error) {
+        console.error('Erro ao buscar a localização:', error);
+        alert('Erro ao buscar a localização. Tente novamente.');
+      }
+    }
+  
+    function montarEnderecoCompleto() {
+      const país = document.getElementById('país').value.trim();
+      const cidade = document.getElementById('cidade').value.trim();
+      const endereço = document.getElementById('endereço').value.trim();
+      const número = document.getElementById('número').value.trim();
+  
+      if (país && cidade && endereço && número) {
+        const endereçoCompleto = `${endereco}, ${número}, ${cidade}, ${país}`;
+        getLocationFromAddress(endereçoCompleto);
+      }
+    }
+  
+    // Dispara a localização quando todos os campos de endereço forem preenchidos
+    ['país', 'cidade', 'endereço', 'número'].forEach(id => {
+      document.getElementById(id).addEventListener('blur', montarEnderecoCompleto);
+    });
+  </script>
+  
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Início - EIV System</title>
+  <link rel="stylesheet" href="/styles/style.css" />
+</head>
+<body>
+  <h1>Sistema EIV</h1>
+  
+  <div class="main-actions">
+    <a href="/cadastro" class="btn-main">Cadastrar Empreendimento</a>
+    <a href="/consulta" class="btn-main">Consultar Empreendimentos</a>
+  </div>
+  
+  <script>
+    async function getLocationFromAddress(enderecoCompleto) {
+      const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(enderecoCompleto)}&format=json&limit=1`;
+  
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'Accept-Language': 'pt-BR',
+          }
+        });
+        const data = await response.json();
+  
+        if (data && data.length > 0) {
+          const location = data[0];
+          const latitude = location.lat;
+          const longitude = location.lon;
+  
+          document.getElementById('latitude').value = latitude;
+          document.getElementById('longitude').value = longitude;
+          document.getElementById('localizacao').value = `${latitude}, ${longitude}`;
+        } else {
+          alert("Endereço não encontrado. Verifique os dados.");
+          document.getElementById('localizacao').value = '';
+        }
+      } catch (error) {
+        console.error('Erro ao buscar a localização:', error);
+        alert('Erro ao buscar a localização. Tente novamente.');
+      }
+    }
+  
+    function montarEnderecoCompleto() {
+      const país = document.getElementById('país').value.trim();
+      const cidade = document.getElementById('cidade').value.trim();
+      const endereço = document.getElementById('endereço').value.trim();
+      const número = document.getElementById('número').value.trim();
+  
+      if (país && cidade && endereço && número) {
+        const endereçoCompleto = `${endereco}, ${número}, ${cidade}, ${país}`;
+        getLocationFromAddress(endereçoCompleto);
+      }
+    }
+  
+    // Dispara a localização quando todos os campos de endereço forem preenchidos
+    ['país', 'cidade', 'endereço', 'número'].forEach(id => {
+      document.getElementById(id).addEventListener('blur', montarEnderecoCompleto);
+    });
+  </script>
+  
 </body>
 </html>
